@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:work_calendar/router/app_router.dart';
 
-void main() {
-  runApp(App());
-}
-
 class App extends StatelessWidget {
   App({super.key}); 
 

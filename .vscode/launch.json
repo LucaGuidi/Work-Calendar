@@ -6,18 +6,15 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
-        },
-        {
-            "name": "[PROFILE] Work-Calendar",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/env/main_dev.dart",
+
         },
         {
             "name": "[RELEASE] Work-Calendar",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "program": "lib/env/main_prod.dart",
         }
     ]
 }
