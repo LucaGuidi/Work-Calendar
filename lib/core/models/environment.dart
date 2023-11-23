@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:work_calendar/core/configuration/configuration.dart';
 import 'package:work_calendar/core/models/locale_env.dart';
 
 enum Environments { dev, prod }
@@ -7,6 +8,7 @@ enum Environments { dev, prod }
 class Environment extends InheritedWidget {
   const Environment({
     this.env,
+    this.config,
     this.appName,
     this.locale,
     this.devMode,
@@ -17,6 +19,7 @@ class Environment extends InheritedWidget {
   });
 
   final Environments? env;
+  final Configuration? config;
   final String? appName;
   final LocaleEnv? locale;
   final bool? devMode;

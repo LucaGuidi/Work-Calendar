@@ -1,12 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:work_calendar/core/api/services/api_service.dart';
 import 'package:work_calendar/core/api/services/logger_service.dart';
+import 'package:work_calendar/core/injection/injection.dart';
 import 'package:work_calendar/core/models/environment.dart';
 
 Future<void> bootstrap(Environment env) async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  configureDependenciesForEnvironment(env);
+
   LoggerService.init(
     printer: SimplePrinter(printTime: true),
     level: (env.logLevel ?? Level.info),
@@ -20,4 +27,8 @@ Future<void> bootstrap(Environment env) async {
       )
     ]),
   );
+
+  getIt<ApiService>().init(env.config!.backed);
+
+  runApp(env);
 }

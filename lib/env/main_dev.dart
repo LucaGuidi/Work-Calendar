@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:work_calendar/bootstrap.dart';
+import 'package:work_calendar/core/configuration/local_config_dev.dart';
 import 'package:work_calendar/core/i18n/loader/i18n_loader.dart';
 import 'package:work_calendar/core/models/environment.dart';
 import 'package:work_calendar/core/models/locale_env.dart';
@@ -9,6 +10,7 @@ import 'package:work_calendar/presentation/init/app.dart';
 Future<void> main() async {
   final env = Environment(
     appName: 'Work Calendar [DEV]',
+    config: localConfigDev,
     baseUrl: 'localhost/3000',
     devMode: true,
     env: Environments.dev,
@@ -24,5 +26,5 @@ Future<void> main() async {
     ),
     child: App(),
   );
-  bootstrap(env);
+  await bootstrap(env);
 }
