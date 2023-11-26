@@ -7,21 +7,23 @@ part of 'day.dart';
 // **************************************************************************
 
 Day _$DayFromJson(Map<String, dynamic> json) => Day(
+      id: json['_id'] as String?,
       date: json['date'] as String?,
       year: json['year'] as int?,
       month: json['month'] as int?,
       day: json['day'] as int?,
       monthName: json['monthName'] as String?,
       dayName: json['dayName'] as String?,
-      holidayString: json['holidayString'] as String?,
+      isHoliday: json['isHoliday'] as bool?,
     );
 
 Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{
+      '_id': instance.id,
       'date': instance.date,
       'year': instance.year,
       'month': instance.month,
       'day': instance.day,
       'monthName': instance.monthName,
       'dayName': instance.dayName,
-      'holidayString': instance.holidayString,
+      'isHoliday': instance.isHoliday,
     };

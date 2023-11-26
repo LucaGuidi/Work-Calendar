@@ -4,24 +4,25 @@ part 'day.g.dart';
 
 @JsonSerializable()
 class Day {
+  @JsonKey(name: "_id")
+  final String? id;
   final String? date;
   final int? year;
   final int? month;
   final int? day;
   final String? monthName;
   final String? dayName;
-  final String? holidayString;
-
-  bool? get isHoliday => bool.tryParse(holidayString ?? '');
+  final bool? isHoliday;
 
   const Day({
+    this.id,
     this.date,
     this.year,
     this.month,
     this.day,
     this.monthName,
     this.dayName,
-    this.holidayString,
+    this.isHoliday,
   });
 
   factory Day.fromJson(Map<String, dynamic> json) => _$DayFromJson(json);

@@ -21,12 +21,22 @@ final localConfigDev = Configuration(
     ),
   ],
   backed: Backend(
-    baseUrl: 'http://192.168.1.8:3000',
+    baseUrl: 'https://work-calendar-lucaguidi.onrender.com/',
     api: [
       Api(
         name: 'getDays',
         method: 'GET',
         url: '/days',
+      ),
+      Api(
+        name: 'getDayByDate',
+        method: 'GET',
+        url: '/days/{date}',
+      ),
+      Api(
+        name: 'getWorkingDays',
+        method: 'POST',
+        url: '/days/getWorkingDays',
       ),
     ],
   ),
