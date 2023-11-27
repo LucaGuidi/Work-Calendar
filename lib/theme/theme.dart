@@ -4,22 +4,22 @@ class AppTheme {
   final Color scaffoldBackgroundColor;
   final Color primaryColor;
   final Color secondaryColor;
+  final Color surface;
 
   AppTheme({
-    this.scaffoldBackgroundColor = const Color(0xFFE2D4CA),
-    this.primaryColor = const Color(0xFF212223),
-    this.secondaryColor = const Color(0xFFC6924F),
+    this.scaffoldBackgroundColor = const Color(0xFF1A1A1A),
+    this.primaryColor = const Color(0xFF1E90FF),
+    this.secondaryColor = const Color(0xFFFFAC1D),
+    this.surface = const Color(0xFF333333)
   });
 
   ThemeData toThemeData() {
     var colorScheme = ColorScheme.fromSeed(
       seedColor: primaryColor,
       primary: primaryColor,
-      onPrimary: secondaryColor,
       secondary: secondaryColor,
-      onSecondary: primaryColor,
-      surface: scaffoldBackgroundColor,
-      onSurface: primaryColor,
+      surface: surface,
+      onSurface: Colors.white,
     );
     return ThemeData(
       scaffoldBackgroundColor: scaffoldBackgroundColor,
@@ -27,8 +27,12 @@ class AppTheme {
       colorScheme: colorScheme,
       fontFamily: 'Consolas',
       appBarTheme: AppBarTheme(
+        foregroundColor: Colors.white,
         backgroundColor: scaffoldBackgroundColor,
         centerTitle: true,
+        iconTheme: const IconThemeData(
+          size: 28
+        )
       ),
       textTheme: const TextTheme(
         headlineLarge: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
@@ -82,6 +86,11 @@ class AppTheme {
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: secondaryColor,
       ),
+      datePickerTheme: DatePickerThemeData(
+        backgroundColor: surface,
+        dividerColor: primaryColor,
+        headerForegroundColor: Colors.white,
+      )
     );
   }
 }

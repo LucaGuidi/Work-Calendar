@@ -1,120 +1,156 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:work_calendar/presentation/home/bloc/home_bloc.dart';
-import 'package:work_calendar/presentation/init/cubit/app_cubit.dart';
 import 'package:work_calendar/shared/extension/build_context_extension.dart';
-import 'package:work_calendar/shared/extension/formatted_date_time.dart';
-import 'package:work_calendar/shared/widgets/custom_text_from_field.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  final _initialDateController = TextEditingController();
-  final _finalDateController = TextEditingController();
-
-  @override
-  void dispose() {
-    _initialDateController.dispose();
-    _finalDateController.dispose();
-    super.dispose();
-  }
-
-  void _updateControllers(BuildContext context, HomeState state) {
-    context.read<AppCubit>().setLoading(state.status == HomeStatus.loading);
-
-    if (getFormattedDateTime(state.initialDate) !=
-        _initialDateController.text) {
-      _initialDateController.text = getFormattedDateTime(state.initialDate);
-    }
-    if (getFormattedDateTime(state.finalDate) != _finalDateController.text) {
-      _finalDateController.text = getFormattedDateTime(state.finalDate);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: BlocConsumer<HomeBloc, HomeState>(
-        listener: _updateControllers,
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(10),
+          child: SvgPicture.asset('assets/images/menu.svg'),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: SvgPicture.asset("assets/images/settings.svg"),
+          )
+        ],
+        title: const Text('WORKING_DAYS_CALCULATOR').tr(),
+      ),
+      body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Working days calculator',
-                  style: context.theme.textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 60),
-                CustomTextFormField(
-                  title: 'Initial Date',
-                  controller: _initialDateController,
-                  suffixIcon: const Icon(Icons.calendar_month_rounded),
-                  isButton: true,
-                  onTap: () async {
-                    await showDatePicker(
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 30),
+                  _datePickerCard(
+                    context: context,
+                    onDatePicked: (date) {
+                      context.read<HomeBloc>().add(InitialDatePicked(date));
+                    },
+                    title: "INITIAL_DATE".tr(),
+                    stateDate: state.initialDate,
+                  ),
+                  const SizedBox(height: 60),
+                  AnimatedOpacity(
+                    opacity: state.showFinalDate ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 500),
+                    child: _datePickerCard(
                       context: context,
-                      firstDate: DateTime.utc(DateTime.now().year - 10),
-                      lastDate: DateTime.utc(DateTime.now().year + 10),
-                    ).then((date) {
-                      if (date != null) {
-                        context.read<HomeBloc>().add(InitialDatePicked(date));
-                      }
-                    });
-                  },
-                ),
-                AnimatedOpacity(
-                  opacity: state.showFinalDate ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 500),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 60),
-                      CustomTextFormField(
-                        title: 'Final Date',
-                        controller: _finalDateController,
-                        suffixIcon: const Icon(Icons.calendar_month_rounded),
-                        isButton: true,
-                        onTap: () async {
-                          await showDatePicker(
-                            context: context,
-                            firstDate: DateTime.utc(DateTime.now().year - 10),
-                            lastDate: DateTime.utc(DateTime.now().year + 10),
-                          ).then((date) {
-                            if (date != null) {
-                              context.read<HomeBloc>().add(FinalDatePicked(date));
-                            }
-                          });
-                        },
-                      ),
-                    ],
+                      onDatePicked: (date) {
+                        context.read<HomeBloc>().add(FinalDatePicked(date));
+                      },
+                      title: "FINAL_DATE".tr(),
+                      stateDate: state.finalDate,
+                    ),
                   ),
-                ),
-                AnimatedOpacity(
-                  opacity: state.showWorkingDays ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 500),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 60),
-                      Text(
-                        'Working days calculated: ${state.workingDays}',
-                        style: context.theme.textTheme.headlineSmall,
-                      )
-                    ],
+                  AnimatedOpacity(
+                    opacity: state.showWorkingDays ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 500),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 60),
+                        Text(
+                          'WORKING_DAYS_CALCULATED',
+                          textAlign: TextAlign.center,
+                          style: context.theme.textTheme.headlineSmall,
+                        ).tr(),
+                        const SizedBox(height: 20),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: context.theme.colorScheme.surface,
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+                              color: context.theme.colorScheme.secondary,
+                            ),
+                          ),
+                          child: Text(
+                            '${state.workingDays}',
+                            style: context.theme.textTheme.headlineLarge!
+                                .copyWith(
+                                    color: context.theme.colorScheme.secondary),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                )
-                // const Calendar(),
-              ],
+                ],
+              ),
             ),
           );
         },
       ),
     );
   }
+}
+
+Widget _datePickerCard({
+  required BuildContext context,
+  required void Function(DateTime) onDatePicked,
+  required String title,
+  DateTime? stateDate,
+}) {
+  return GestureDetector(
+    onTap: () async {
+      await showDatePicker(
+        context: context,
+        firstDate: DateTime.utc(DateTime.now().year - 10),
+        lastDate: DateTime.utc(DateTime.now().year + 10),
+      ).then((date) {
+        if (date != null) {
+          onDatePicked(date);
+        }
+      });
+    },
+    child: Container(
+      width: double.infinity,
+      height: context.height / 5,
+      decoration: BoxDecoration(
+        color: context.theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(25),
+        border: Border.all(
+          color: context.theme.colorScheme.secondary,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(vertical: 2),
+            decoration: BoxDecoration(
+              color: context.theme.colorScheme.primary,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Text(
+                title,
+                style: context.theme.textTheme.titleSmall,
+              ),
+            ),
+          ),
+          if (stateDate != null) ...[
+            const SizedBox(height: 20),
+            Center(
+              child: Text(
+                DateFormat('d MMMM yyyy').format(stateDate),
+                style: context.theme.textTheme.headlineSmall,
+              ),
+            )
+          ]
+        ],
+      ),
+    ),
+  );
 }

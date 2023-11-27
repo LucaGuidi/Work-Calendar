@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -14,7 +15,8 @@ import 'package:work_calendar/core/models/environment.dart';
 
 Future<void> bootstrap(Environment env) async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await EasyLocalization.ensureInitialized();
+  
   configureDependenciesForEnvironment(env);
 
   LoggerService.init(

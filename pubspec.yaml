@@ -23,6 +23,7 @@ dependencies:
   json_annotation: ^4.8.1
   collection: ^1.18.0
   path_provider: ^2.1.1
+  flutter_svg: ^2.0.9
   
   #router
   auto_route: ^7.8.4
@@ -47,6 +48,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/langs/
 
 #scripts
 scripts: derry.yaml
