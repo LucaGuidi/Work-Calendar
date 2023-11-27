@@ -18,16 +18,19 @@ class AppLoader extends StatelessWidget {
         child,
         BlocBuilder<AppCubit, AppState>(
           builder: (context, state) {
-            return Visibility(
-              visible: state.isLoading,
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: context.theme.colorScheme.primary.withOpacity(0.2),
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              // visible: state.isLoading,
+              child: state.isLoading
+                  ? Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: context.theme.scaffoldBackgroundColor.withOpacity(0.4),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : null,
             );
           },
         ),

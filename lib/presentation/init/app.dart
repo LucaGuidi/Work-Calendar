@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:work_calendar/core/injection/injection.dart';
 import 'package:work_calendar/core/models/environment.dart';
 import 'package:work_calendar/presentation/init/cubit/app_cubit.dart';
+import 'package:work_calendar/presentation/settings/bloc/settings_bloc.dart';
 import 'package:work_calendar/router/app_router.dart';
 import 'package:work_calendar/shared/widgets/app_loader.dart';
 import 'package:work_calendar/theme/theme.dart';
@@ -23,7 +24,10 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => AppCubit(),
-          )
+          ),
+          BlocProvider(
+            create: (context) => SettingsBloc()..add(SettingsStarted()),
+          ),
         ],
         child: _LocalizedApplication(),
       ),

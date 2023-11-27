@@ -18,13 +18,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final DaysRepository _daysRepository;
 
   FutureOr<void> _onInitialDatePicked(InitialDatePicked event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(initialDate: event.initialDate));
+    emit(state.copyWith(initialDate: event.initialDate, finalDate: () => null, workingDays: () => null));
   }
 
   FutureOr<void> _onFinalDatePicked(FinalDatePicked event, Emitter<HomeState> emit) async {
     emit(state.copyWith(finalDate: event.finalDate, status: HomeStatus.loading));
 
-    //DO THINGS
     final failureOrDay = await _daysRepository.getWorkingDays(
       initialDate: state.initialDate!.millisecondsSinceEpoch,
       finalDate: state.finalDate!.millisecondsSinceEpoch,
@@ -34,7 +33,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       (days) {
         emit(state.copyWith(
           status: HomeStatus.ready,
-          workingDays: days,
+          workingDays: () => days,
         ));
       },
     );

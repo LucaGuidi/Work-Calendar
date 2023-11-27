@@ -9,7 +9,7 @@ class AppTheme {
   AppTheme({
     this.scaffoldBackgroundColor = const Color(0xFF1A1A1A),
     this.primaryColor = const Color(0xFF1E90FF),
-    this.secondaryColor = const Color(0xFFFFAC1D),
+    this.secondaryColor = Colors.white,
     this.surface = const Color(0xFF333333)
   });
 
@@ -23,7 +23,7 @@ class AppTheme {
     );
     return ThemeData(
       scaffoldBackgroundColor: scaffoldBackgroundColor,
-      dialogBackgroundColor: scaffoldBackgroundColor,
+      dialogBackgroundColor: surface,
       colorScheme: colorScheme,
       fontFamily: 'Consolas',
       appBarTheme: AppBarTheme(
@@ -31,7 +31,7 @@ class AppTheme {
         backgroundColor: scaffoldBackgroundColor,
         centerTitle: true,
         iconTheme: const IconThemeData(
-          size: 28
+          size: 25
         )
       ),
       textTheme: const TextTheme(
@@ -90,7 +90,7 @@ class AppTheme {
         backgroundColor: surface,
         dividerColor: primaryColor,
         headerForegroundColor: Colors.white,
-      )
+      ),
     );
   }
 }

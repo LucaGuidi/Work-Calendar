@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:work_calendar/presentation/home/bloc/home_bloc.dart';
+import 'package:work_calendar/presentation/init/cubit/app_cubit.dart';
+import 'package:work_calendar/router/app_router.dart';
 import 'package:work_calendar/shared/extension/build_context_extension.dart';
 
 class HomeView extends StatelessWidget {
@@ -17,14 +20,17 @@ class HomeView extends StatelessWidget {
           child: SvgPicture.asset('assets/images/menu.svg'),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: SvgPicture.asset("assets/images/settings.svg"),
+          IconButton(
+            onPressed: () => context.pushRoute(const SettingsRoute()),
+            icon: SvgPicture.asset("assets/images/settings.svg"),
           )
         ],
         title: const Text('WORKING_DAYS_CALCULATOR').tr(),
       ),
-      body: BlocBuilder<HomeBloc, HomeState>(
+      body: BlocConsumer<HomeBloc, HomeState>(
+        listener: (context, state) {
+          context.read<AppCubit>().setLoading(state.status == HomeStatus.loading);
+        },
         builder: (context, state) {
           return SingleChildScrollView(
             child: Padding(
@@ -48,7 +54,7 @@ class HomeView extends StatelessWidget {
                     child: _datePickerCard(
                       context: context,
                       onDatePicked: (date) {
-                        context.read<HomeBloc>().add(FinalDatePicked(date));
+                        context.read<HomeBloc>().add(FinalDatePicked(() => date));
                       },
                       title: "FINAL_DATE".tr(),
                       stateDate: state.finalDate,
@@ -67,19 +73,14 @@ class HomeView extends StatelessWidget {
                         ).tr(),
                         const SizedBox(height: 20),
                         Container(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                           decoration: BoxDecoration(
                             color: context.theme.colorScheme.surface,
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                              color: context.theme.colorScheme.secondary,
-                            ),
+                            borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
                             '${state.workingDays}',
-                            style: context.theme.textTheme.headlineLarge!
-                                .copyWith(
-                                    color: context.theme.colorScheme.secondary),
+                            style: context.theme.textTheme.headlineLarge,
                           ),
                         )
                       ],
@@ -118,10 +119,7 @@ Widget _datePickerCard({
       height: context.height / 5,
       decoration: BoxDecoration(
         color: context.theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(
-          color: context.theme.colorScheme.secondary,
-        ),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,7 +129,7 @@ Widget _datePickerCard({
             padding: const EdgeInsets.symmetric(vertical: 2),
             decoration: BoxDecoration(
               color: context.theme.colorScheme.primary,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(6),
             ),
             child: Center(
               child: Text(

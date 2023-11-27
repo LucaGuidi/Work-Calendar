@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work_calendar/core/models/environment.dart' as app;
 
 import 'injection.config.dart';
@@ -14,5 +15,6 @@ void configureDependenciesForEnvironment(app.Environment env) {
 
 @module
 abstract class RegisterModule {
-  //REGISTER HERE
+  @preResolve
+  Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 }

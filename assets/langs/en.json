@@ -2,5 +2,19 @@
     "WORKING_DAYS_CALCULATOR": "Working days calculator",
     "WORKING_DAYS_CALCULATED": "Working days calculated",
     "INITIAL_DATE": "Initial date",
-    "FINAL_DATE": "Final date"
+    "FINAL_DATE": "Final date",
+
+    "SETTINGS": "Settings",
+    "SET_NON_WORKING_DAYS": "Set non-working days",
+    "SET": "Set",
+
+    "OK": "Ok",
+    "CANCEL": "Cancel",
+    "MONDAY": "Monday",
+    "TUESDAY": "Tuesday",
+    "WEDNESDAY": "Wednesday",
+    "THURSDAY": "Thursday",
+    "FRIDAY": "Friday",
+    "SATURDAY": "Saturday",
+    "SUNDAY": "Sunday"
 }

@@ -2,5 +2,19 @@
     "WORKING_DAYS_CALCULATOR": "Calcolatore giorni lavorativi",
     "WORKING_DAYS_CALCULATED": "Giorni lavorativi calcolati",
     "INITIAL_DATE": "Data iniziale",
-    "FINAL_DATE": "Data finale"
+    "FINAL_DATE": "Data finale",
+
+    "SETTINGS": "Impostazioni",
+    "SET_NON_WORKING_DAYS": "Seleziona giorni non lavorativi",
+    "SET": "Seleziona",
+
+    "OK": "Ok",
+    "CANCEL": "Annulla",
+    "MONDAY": "lunedì",
+    "TUESDAY": "martedì",
+    "WEDNESDAY": "mercoledì",
+    "THURSDAY": "giovedì",
+    "FRIDAY": "venerdì",
+    "SATURDAY": "sabato",
+    "SUNDAY": "domenica"
 }

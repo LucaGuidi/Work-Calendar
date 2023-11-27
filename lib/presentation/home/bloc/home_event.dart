@@ -12,7 +12,7 @@ class InitialDatePicked extends HomeEvent {
 
 class FinalDatePicked extends HomeEvent {
   FinalDatePicked(this.finalDate);
-  final DateTime finalDate;
+  final DateTime? Function()? finalDate;
 
   @override
   List<Object?> get props => [finalDate];

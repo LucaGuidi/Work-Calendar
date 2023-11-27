@@ -28,16 +28,16 @@ class HomeState extends Equatable {
     Failure? failure,
     List<Day>? days,
     DateTime? initialDate,
-    DateTime? finalDate,
-    int? workingDays,
+    DateTime? Function()? finalDate,
+    int? Function()? workingDays,
   }) {
     return HomeState(
       status: status ?? this.status,
       failure: failure ?? this.failure,
       days: days ?? this.days,
       initialDate: initialDate ?? this.initialDate,
-      finalDate: finalDate ?? this.finalDate,
-      workingDays: workingDays ?? this.workingDays,
+      finalDate: finalDate != null ? finalDate() : this.finalDate,
+      workingDays: workingDays != null ? workingDays() : this.workingDays,
     );
   }
 
