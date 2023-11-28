@@ -7,5 +7,9 @@ import 'package:work_calendar/data/models/day.dart';
 abstract class DaysRepository extends Repository<DaysDataSource> {
   Future<Either<Failure, List<Day>>> getDays();
   Future<Either<Failure, Day>> getDayByDate(String date);
-  Future<Either<Failure, int>> getWorkingDays({required int initialDate, required int finalDate});
+  Future<Either<Failure, int>> getWorkingDays({
+    required int initialDate,
+    required int finalDate,
+    required List<String> nonWorkingDays,
+  });
 }

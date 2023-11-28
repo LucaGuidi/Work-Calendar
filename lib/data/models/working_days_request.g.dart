@@ -10,4 +10,5 @@ Map<String, dynamic> _$WorkingDaysRequestToJson(WorkingDaysRequest instance) =>
     <String, dynamic>{
       'initialDate': instance.initialDate,
       'finalDate': instance.finalDate,
+      'nonWorkingDays': instance.nonWorkingDays,
     };

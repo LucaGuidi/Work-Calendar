@@ -24,12 +24,17 @@ class DaysRepositoryImpl extends DaysRepository {
   }
 
   @override
-  Future<Either<Failure, int>> getWorkingDays({required int initialDate, required int finalDate}) {
+  Future<Either<Failure, int>> getWorkingDays({
+    required int initialDate,
+    required int finalDate,
+    required List<String> nonWorkingDays,
+  }) {
     return catchException(() async {
       final response = await dataSource.getWorkingDaysNumber(
         WorkingDaysRequest(
           initialDate: initialDate,
           finalDate: finalDate,
+          nonWorkingDays: nonWorkingDays,
         ),
       );
       return response;

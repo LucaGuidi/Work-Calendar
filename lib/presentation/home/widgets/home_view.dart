@@ -79,7 +79,7 @@ class HomeView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
-                            '${state.workingDays}',
+                            '${state.workingDays ?? '  '}',
                             style: context.theme.textTheme.headlineLarge,
                           ),
                         )
