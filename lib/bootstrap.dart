@@ -16,11 +16,11 @@ import 'package:work_calendar/core/models/environment.dart';
 Future<void> bootstrap(Environment env) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  
+
   configureDependenciesForEnvironment(env);
 
   LoggerService.init(
-    printer: SimplePrinter(printTime: true),
+    printer: SimplePrinter(),
     level: (env.logLevel ?? Level.info),
     filter: (env.devMode ?? true) ? ProductionFilter() : DevelopmentFilter(),
     output: MultiOutput([

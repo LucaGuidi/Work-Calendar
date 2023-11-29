@@ -2,7 +2,7 @@ part of 'settings_bloc.dart';
 
 class SettingsState extends Equatable {
   const SettingsState({
-    this.chosenDays = const [false, false, false, false, false, false, false],
+    this.chosenDays = const [false, false, false, false, false, true, true],
   });
 
   final List<bool> chosenDays;

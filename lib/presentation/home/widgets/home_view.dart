@@ -7,17 +7,25 @@ import 'package:work_calendar/presentation/home/bloc/home_bloc.dart';
 import 'package:work_calendar/presentation/init/cubit/app_cubit.dart';
 import 'package:work_calendar/router/app_router.dart';
 import 'package:work_calendar/shared/extension/build_context_extension.dart';
+import 'package:work_calendar/shared/widgets/app_drawer.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({
+    super.key,
+    required this.scaffoldKey,
+  });
+
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: const AppDrawer(),
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(10),
-          child: SvgPicture.asset('assets/images/menu.svg'),
+        leading: IconButton(
+          onPressed: () => scaffoldKey.currentState?.openDrawer(),
+          icon: SvgPicture.asset("assets/images/menu.svg"),
         ),
         actions: [
           IconButton(
