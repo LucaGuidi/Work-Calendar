@@ -10,7 +10,7 @@ class HttpLoggerInterceptor extends QueuedInterceptorsWrapper {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    LoggerService.d('### RESPONSE ###\nResponse Tect: ${response.data}');
+    LoggerService.d('### RESPONSE ###\nResponse Text: ${response.data}');
     super.onResponse(response, handler);
   }
 }
