@@ -37,35 +37,36 @@ class ErrorDialog extends StatelessWidget {
           ],
         ),
         child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 30),
-              Text(
-                title?.tr() ?? app.Environment.of(context)!.appName!,
-                textAlign: TextAlign.center,
-                style: context.theme.textTheme.titleSmall,
-              ),
-              const SizedBox(height: 10),
-              Text(
-                description,
-                textAlign: TextAlign.center,
-                style: context.theme.textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ElevatedButton(
-                  onPressed: onConfirm ?? () => context.popRoute(),
-                  child: FittedBox(
-                    child: Text(
-                      buttonText,
-                      style: context.theme.textTheme.titleSmall,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 30),
+                Text(
+                  title?.tr() ?? app.Environment.of(context)!.appName!,
+                  textAlign: TextAlign.center,
+                  style: context.theme.textTheme.titleSmall,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  description,
+                  textAlign: TextAlign.center,
+                  style: context.theme.textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 30),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: onConfirm ?? () => context.popRoute(),
+                    child: FittedBox(
+                      child: Text(buttonText.toUpperCase()),
                     ),
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -21,7 +21,7 @@ class SettingsView extends StatelessWidget {
             children: [
               const SizedBox(height: 30),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.only(left: 20),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: context.theme.colorScheme.surface,
@@ -30,10 +30,12 @@ class SettingsView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "SET_NON_WORKING_DAYS",
-                      style: context.theme.textTheme.titleSmall,
-                    ).tr(),
+                    Expanded(
+                      child: Text(
+                        "SET_NON_WORKING_DAYS",
+                        style: context.theme.textTheme.titleSmall,
+                      ).tr(),
+                    ),
                     TextButton(
                       onPressed: () => showDialog(
                         context: context,

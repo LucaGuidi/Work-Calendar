@@ -8,6 +8,7 @@ import 'package:work_calendar/presentation/init/cubit/app_cubit.dart';
 import 'package:work_calendar/router/app_router.dart';
 import 'package:work_calendar/shared/extension/build_context_extension.dart';
 import 'package:work_calendar/shared/widgets/app_drawer.dart';
+import 'package:work_calendar/shared/widgets/dialogs_servide.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({
@@ -38,6 +39,13 @@ class HomeView extends StatelessWidget {
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           context.read<AppCubit>().setLoading(state.status == HomeStatus.loading);
+          if (state.status == HomeStatus.failure) {
+            DialogService.show(
+              context,
+              DialogType.error,
+              message: state.failureMessage,
+            );
+          }
         },
         builder: (context, state) {
           return SingleChildScrollView(
@@ -124,7 +132,7 @@ Widget _datePickerCard({
     },
     child: Container(
       width: double.infinity,
-      height: context.height / 5,
+      padding: const EdgeInsets.only(bottom: 40),
       decoration: BoxDecoration(
         color: context.theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
@@ -146,15 +154,14 @@ Widget _datePickerCard({
               ),
             ),
           ),
-          if (stateDate != null) ...[
-            const SizedBox(height: 20),
-            Center(
-              child: Text(
-                DateFormat('d MMMM yyyy').format(stateDate),
-                style: context.theme.textTheme.headlineSmall,
-              ),
-            )
-          ]
+          const SizedBox(height: 20),
+          Center(
+            child: Text(
+              stateDate != null ? DateFormat('d MMMM yyyy').format(stateDate) : '',
+              textAlign: TextAlign.center,
+              style: context.theme.textTheme.headlineSmall,
+            ),
+          )
         ],
       ),
     ),

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:work_calendar/core/errors/models/failure.dart';
 import 'package:work_calendar/core/injection/injection.dart';
 import 'package:work_calendar/data/models/day.dart';
 import 'package:work_calendar/data/repository/days_repository.dart';
@@ -33,7 +32,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       nonWorkingDays: [...getDaysFromArray(getIt<StorageService>().loadNonWorkingDays())],
     );
     failureOrDay.fold(
-      (failure) => null,
+      (failure) {
+        emit(state.copyWith(
+          failureMessage: failure.message,
+          status: HomeStatus.failure,
+        ));
+      },
       (days) {
         emit(state.copyWith(
           status: HomeStatus.ready,

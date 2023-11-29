@@ -4,7 +4,7 @@ enum HomeStatus { ready, loading, failure }
 
 class HomeState extends Equatable {
   final HomeStatus status;
-  final Failure? failure;
+  final String failureMessage;
   final List<Day>? days;
   final DateTime? initialDate;
   final DateTime? finalDate;
@@ -16,7 +16,7 @@ class HomeState extends Equatable {
 
   const HomeState({
     this.status = HomeStatus.ready,
-    this.failure,
+    this.failureMessage = '',
     this.days,
     this.initialDate,
     this.finalDate,
@@ -25,7 +25,7 @@ class HomeState extends Equatable {
 
   HomeState copyWith({
     HomeStatus? status,
-    Failure? failure,
+    String? failureMessage,
     List<Day>? days,
     DateTime? initialDate,
     DateTime? Function()? finalDate,
@@ -33,7 +33,7 @@ class HomeState extends Equatable {
   }) {
     return HomeState(
       status: status ?? this.status,
-      failure: failure ?? this.failure,
+      failureMessage: failureMessage ?? this.failureMessage,
       days: days ?? this.days,
       initialDate: initialDate ?? this.initialDate,
       finalDate: finalDate != null ? finalDate() : this.finalDate,
@@ -44,7 +44,7 @@ class HomeState extends Equatable {
   @override
   List<Object?> get props => [
         status,
-        failure,
+        failureMessage,
         days,
         initialDate,
         if (showFinalDate) finalDate,
