@@ -6,8 +6,7 @@ class ApiInterceptor extends QueuedInterceptorsWrapper {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final baseUrl = options.baseUrl;
     final path = options.path;
-    LoggerService.d('API INTERCEPTOR ## BASE URL: $baseUrl');
-    LoggerService.d('API INTERCEPTOR ## ENDPOINT: $path');
+    LoggerService.d('### BASE URL: $baseUrl\n### ENDPOINT: $path');
     super.onRequest(options, handler);
   }
 }
