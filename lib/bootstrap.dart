@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:work_calendar/core/api/services/api_interceptor.dart';
@@ -14,8 +15,10 @@ import 'package:work_calendar/core/injection/injection.dart';
 import 'package:work_calendar/core/models/environment.dart';
 
 Future<void> bootstrap(Environment env) async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await EasyLocalization.ensureInitialized();
+
 
   configureDependenciesForEnvironment(env);
 

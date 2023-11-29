@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:work_calendar/core/injection/injection.dart';
 import 'package:work_calendar/core/models/environment.dart';
 import 'package:work_calendar/presentation/init/cubit/app_cubit.dart';
@@ -44,6 +45,8 @@ class _LocalizedApplicationState extends State<_LocalizedApplication> {
   @override
   void initState() {
     _registerAppRouter();
+    FlutterNativeSplash.remove();
+
     super.initState();
   }
 
