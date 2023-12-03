@@ -38,6 +38,11 @@ final localConfigDev = Configuration(
         method: 'POST',
         url: '/days/getWorkingDays',
       ),
+      Api(
+        name: 'getHolidays',
+        method: 'GET',
+        url: '/days/holidays',
+      ),
     ],
   ),
 );

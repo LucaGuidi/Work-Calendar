@@ -12,4 +12,5 @@ abstract class DaysRepository extends Repository<DaysDataSource> {
     required int finalDate,
     required List<String> nonWorkingDays,
   });
+  Future<Either<Failure, List<Day>>> getHolidays();
 }

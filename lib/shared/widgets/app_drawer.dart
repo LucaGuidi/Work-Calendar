@@ -11,6 +11,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      surfaceTintColor: context.theme.scaffoldBackgroundColor,
       backgroundColor: context.theme.scaffoldBackgroundColor,
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -24,16 +25,31 @@ class AppDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 20),
-                    Text(
-                      'NON_WORKING_DAYS'.tr(),
-                      style: context.theme.textTheme.titleLarge,
-                    ),
-                    Divider(color: context.theme.colorScheme.primary),
-                    for (var day in days)
-                      Text(
-                        day,
-                        style: context.theme.textTheme.bodyMedium,
+                    Container(
+                      padding: const EdgeInsets.only(left: 20),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: context.theme.colorScheme.surface,
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const SizedBox(height: 6),
+                          Text(
+                            'NON_WORKING_DAYS'.tr(),
+                            style: context.theme.textTheme.bodySmall,
+                          ),
+                          const Divider(thickness: 0.1),
+                          for (var day in days)
+                            Text(
+                              day,
+                              style: context.theme.textTheme.bodySmall,
+                            ),
+                          const SizedBox(height: 6),
+                        ],
+                      ),
+                    ),
                   ],
                 );
               },

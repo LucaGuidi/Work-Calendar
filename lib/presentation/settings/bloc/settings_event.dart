@@ -22,3 +22,12 @@ class SettingsDaysChanged extends SettingsEvent {
         dayValue,
       ];
 }
+
+class HolidaysSelectorToggled extends SettingsEvent {
+  HolidaysSelectorToggled(this.value);
+
+  final bool value;
+
+  @override
+  List<Object?> get props => [value];
+}

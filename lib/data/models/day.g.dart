@@ -8,7 +8,7 @@ part of 'day.dart';
 
 Day _$DayFromJson(Map<String, dynamic> json) => Day(
       id: json['_id'] as String?,
-      date: json['date'] as String?,
+      date: json['date'] as int?,
       year: json['year'] as int?,
       month: json['month'] as int?,
       day: json['day'] as int?,

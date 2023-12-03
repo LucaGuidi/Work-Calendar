@@ -6,7 +6,7 @@ part 'day.g.dart';
 class Day {
   @JsonKey(name: "_id")
   final String? id;
-  final String? date;
+  final int? date;
   final int? year;
   final int? month;
   final int? day;

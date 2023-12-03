@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:work_calendar/core/injection/injection.dart';
+import 'package:work_calendar/data/repository/days_repository.dart';
 import 'package:work_calendar/domain/repositories/storage_service.dart';
 
 part 'settings_event.dart';
@@ -12,14 +13,29 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc() : super(const SettingsState()) {
     on<SettingsStarted>(_onStarted);
     on<SettingsDaysChanged>(_onSettingsDaysChanged);
+    on<HolidaysSelectorToggled>(_onHolidaysSelectorToggled);
   }
 
-  FutureOr<void> _onStarted(SettingsStarted event, Emitter<SettingsState> emit) {
+  FutureOr<void> _onStarted(SettingsStarted event, Emitter<SettingsState> emit) async {
     List<bool> nonWorkingDays = getIt<StorageService>().loadNonWorkingDays();
+    final failureOrHolidays = await getIt<DaysRepository>().getHolidays();
 
-    if (nonWorkingDays.isNotEmpty) {
-      emit(state.copyWith(chosenDays: [...nonWorkingDays]));
-    }
+    failureOrHolidays.fold(
+      (failure) {
+        //TODO
+      },
+      (days) {
+        List<DateTime> d = [];
+        for (var day in days) {
+          d.add(DateTime.fromMillisecondsSinceEpoch(day.date ?? 0));
+        }
+        if (nonWorkingDays.isNotEmpty) {
+          emit(state.copyWith(chosenDays: [...nonWorkingDays], holidays: [...d]));
+        } else {
+          emit(state.copyWith(holidays: [...d]));
+        }
+      },
+    );
   }
 
   FutureOr<void> _onSettingsDaysChanged(SettingsDaysChanged event, Emitter<SettingsState> emit) async {
@@ -29,5 +45,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     await getIt<StorageService>().storeNonWorkingDays(updatedDays);
 
     emit(state.copyWith(chosenDays: updatedDays));
+  }
+
+  FutureOr<void> _onHolidaysSelectorToggled(HolidaysSelectorToggled event, Emitter<SettingsState> emit) {
+    emit(state.copyWith(isSingleDay: event.value));
   }
 }

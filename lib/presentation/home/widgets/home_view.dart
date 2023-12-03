@@ -8,7 +8,7 @@ import 'package:work_calendar/presentation/init/cubit/app_cubit.dart';
 import 'package:work_calendar/router/app_router.dart';
 import 'package:work_calendar/shared/extension/build_context_extension.dart';
 import 'package:work_calendar/shared/widgets/app_drawer.dart';
-import 'package:work_calendar/shared/widgets/dialogs_servide.dart';
+import 'package:work_calendar/shared/widgets/dialogs_service.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({
@@ -135,7 +135,7 @@ Widget _datePickerCard({
       padding: const EdgeInsets.only(bottom: 40),
       decoration: BoxDecoration(
         color: context.theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -6,12 +6,11 @@ class AppTheme {
   final Color secondaryColor;
   final Color surface;
 
-  AppTheme({
-    this.scaffoldBackgroundColor = const Color(0xFF1A1A1A),
-    this.primaryColor = const Color(0xFF1E90FF),
-    this.secondaryColor = Colors.white,
-    this.surface = const Color(0xFF333333)
-  });
+  AppTheme(
+      {this.scaffoldBackgroundColor = const Color(0xFF1A1A1A),
+      this.primaryColor = const Color(0xFF1E90FF),
+      this.secondaryColor = Colors.white,
+      this.surface = const Color(0xFF333333)});
 
   ThemeData toThemeData() {
     var colorScheme = ColorScheme.fromSeed(
@@ -19,7 +18,7 @@ class AppTheme {
       primary: primaryColor,
       secondary: secondaryColor,
       surface: surface,
-      onSurface: Colors.white,
+      onSurface: secondaryColor,
     );
     return ThemeData(
       scaffoldBackgroundColor: scaffoldBackgroundColor,
@@ -30,9 +29,8 @@ class AppTheme {
         foregroundColor: Colors.white,
         backgroundColor: scaffoldBackgroundColor,
         centerTitle: true,
-        iconTheme: const IconThemeData(
-          size: 25
-        )
+        iconTheme: const IconThemeData(size: 20),
+        titleTextStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
       textTheme: const TextTheme(
         headlineLarge: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
@@ -81,11 +79,9 @@ class AppTheme {
         border: const UnderlineInputBorder(
           borderSide: BorderSide(),
           borderRadius: BorderRadius.all(Radius.circular(20)),
-        )
+        ),
       ),
-      progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: secondaryColor,
-      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(color: secondaryColor),
       datePickerTheme: DatePickerThemeData(
         backgroundColor: surface,
         dividerColor: primaryColor,

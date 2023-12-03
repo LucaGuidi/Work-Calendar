@@ -8,7 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:work_calendar/core/api/services/api_interceptor.dart';
 import 'package:work_calendar/core/api/services/api_service.dart';
-import 'package:work_calendar/core/api/services/htto_logger_interceptor.dart';
+import 'package:work_calendar/core/api/services/http_logger_interceptor.dart';
 import 'package:work_calendar/core/api/services/logger_service.dart';
 import 'package:work_calendar/core/api/services/throttling_interceptor.dart';
 import 'package:work_calendar/core/injection/injection.dart';

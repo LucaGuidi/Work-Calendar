@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work_calendar/core/constants/key_constants.dart';
+import 'package:work_calendar/data/models/day.dart';
 
 @LazySingleton()
 class StorageService {
@@ -22,5 +23,17 @@ class StorageService {
     List<bool> loadedDays = [];
     (jsonDecode(nonWorkingDays ?? '[]') as List?)?.forEach((e) => loadedDays.add(e));
     return loadedDays;
+  }
+
+  Future<void> storeUserHolidays(List<Day> userHolidays) async {
+    await _storage.setString(
+      KeyConstants.userHolidays,
+      jsonEncode(userHolidays),
+    );
+  }
+
+  List<Day> loadUserHolidays() {
+    var userHolidays = _storage.getString(KeyConstants.userHolidays);
+    return (jsonDecode(userHolidays ?? '[]') as List?)?.map((e) => Day.fromJson(e)).toList() ?? [];
   }
 }

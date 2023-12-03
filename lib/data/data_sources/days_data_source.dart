@@ -10,6 +10,7 @@ abstract class DaysDataSource implements DataSource {
   Future<List<Day>> getDays();
   Future<Day> getDayByDate(String date);
   Future<int> getWorkingDaysNumber(WorkingDaysRequest request);
+  Future<List<Day>> getHolidays();
 }
 
 @LazySingleton(as: DaysDataSource)
@@ -46,5 +47,17 @@ class DaysDataSourceImpl extends DaysDataSource {
     );
 
     return response.data['workingDays'];
+  }
+
+  @override
+  Future<List<Day>> getHolidays() async {
+    final response = await getIt<ApiService>().callApi(
+      'getHolidays',
+      options: const ApiOptions(),
+    );
+
+    return List<Day>.from((response.data as Iterable).map(
+      (e) => Day.fromJson(e),
+    ));
   }
 }

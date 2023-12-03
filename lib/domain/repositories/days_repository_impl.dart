@@ -40,4 +40,12 @@ class DaysRepositoryImpl extends DaysRepository {
       return response;
     });
   }
+
+  @override
+  Future<Either<Failure, List<Day>>> getHolidays() {
+    return catchException(() async {
+      final response = await dataSource.getHolidays();
+      return response;
+    });
+  }
 }
