@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:work_calendar/presentation/init/cubit/app_cubit.dart';
 import 'package:work_calendar/shared/extension/build_context_extension.dart';
@@ -27,7 +27,7 @@ class AppLoader extends StatelessWidget {
                       height: double.infinity,
                       color: context.theme.scaffoldBackgroundColor.withOpacity(0.4),
                       child: const Center(
-                        child: CircularProgressIndicator(),
+                        child: CupertinoActivityIndicator(radius: 20),
                       ),
                     )
                   : null,

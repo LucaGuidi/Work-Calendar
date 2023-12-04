@@ -1,5 +1,5 @@
 {
-  "WORKING_DAYS_CALCULATOR": "Calcolatore giorni lavorativi",
+  "WORKING_DAYS": "Giorni lavorativi",
   "WORKING_DAYS_CALCULATED": "Giorni lavorativi calcolati",
   "INITIAL_DATE": "Data iniziale",
   "FINAL_DATE": "Data finale",
@@ -20,5 +20,8 @@
   "THURSDAY": "giovedì",
   "FRIDAY": "venerdì",
   "SATURDAY": "sabato",
-  "SUNDAY": "domenica"
+  "SUNDAY": "domenica",
+
+  "SINGLE_DAY": "Giorno singolo",
+  "MENU": "Menù"
 }

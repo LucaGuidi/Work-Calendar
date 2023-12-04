@@ -28,7 +28,7 @@ class GenericDialog extends StatelessWidget {
       child: Container(
         width: context.width / 1.2,
         decoration: BoxDecoration(
-          color: context.theme.dialogBackgroundColor,
+          color: context.theme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -47,13 +47,11 @@ class GenericDialog extends StatelessWidget {
               Text(
                 title?.tr() ?? app.Environment.of(context)!.appName!,
                 textAlign: TextAlign.center,
-                style: context.theme.textTheme.titleSmall,
               ),
               const SizedBox(height: 10),
               Text(
                 message.tr(),
                 textAlign: TextAlign.center,
-                style: context.theme.textTheme.bodyMedium,
               ),
               const SizedBox(height: 30),
               Padding(
@@ -67,7 +65,6 @@ class GenericDialog extends StatelessWidget {
                           child: FittedBox(
                             child: Text(
                               confirmCaption!.toUpperCase(),
-                              style: context.theme.textTheme.titleSmall,
                             ),
                           ),
                         ),
@@ -80,7 +77,6 @@ class GenericDialog extends StatelessWidget {
                           child: FittedBox(
                             child: Text(
                               cancelCaption!.toUpperCase(),
-                              style: context.theme.textTheme.titleSmall,
                             ),
                           ),
                         ),

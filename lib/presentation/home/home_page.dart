@@ -7,28 +7,14 @@ import 'package:work_calendar/presentation/home/bloc/home_bloc.dart';
 import 'package:work_calendar/presentation/home/widgets/home_view.dart';
 
 @RoutePage()
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> with AutoRouteAwareStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-
-  @override
-  void didPushNext() {
-    _scaffoldKey.currentState?.closeDrawer();
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HomeBloc(getIt<DaysRepository>()),
-      child: HomeView(
-        scaffoldKey: _scaffoldKey,
-      ),
+      child: const HomeView(),
     );
   }
 }

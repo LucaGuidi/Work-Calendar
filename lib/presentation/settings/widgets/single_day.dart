@@ -55,7 +55,7 @@ Widget _datePickerCard({
       width: double.infinity,
       padding: const EdgeInsets.only(bottom: 40),
       decoration: BoxDecoration(
-        color: context.theme.colorScheme.surface,
+        color: context.theme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -65,14 +65,11 @@ Widget _datePickerCard({
             margin: const EdgeInsets.all(20),
             padding: const EdgeInsets.symmetric(vertical: 2),
             decoration: BoxDecoration(
-              color: context.theme.colorScheme.primary,
+              color: context.theme.primaryColor,
               borderRadius: BorderRadius.circular(6),
             ),
             child: Center(
-              child: Text(
-                title,
-                style: context.theme.textTheme.titleSmall,
-              ),
+              child: Text(title),
             ),
           ),
           const SizedBox(height: 20),
@@ -80,7 +77,6 @@ Widget _datePickerCard({
             child: Text(
               stateDate != null ? DateFormat('d MMMM yyyy').format(stateDate) : '',
               textAlign: TextAlign.center,
-              style: context.theme.textTheme.headlineSmall,
             ),
           )
         ],

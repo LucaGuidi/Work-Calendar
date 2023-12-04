@@ -6,20 +6,11 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> weekdays = [
-      "",
-      "Mo",
-      "Tu",
-      "We",
-      "Th",
-      "Fr",
-      "Sa",
-      "Su"
-    ];
+    final List<String> weekdays = ["", "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: context.theme.colorScheme.primary,
+        color: context.theme.primaryColor,
         borderRadius: BorderRadius.circular(25),
       ),
       child: Padding(
@@ -33,20 +24,15 @@ class Calendar extends StatelessWidget {
                   onPressed: () {},
                   icon: Icon(
                     Icons.arrow_back_ios_rounded,
-                    color: context.theme.colorScheme.secondary,
+                    color: context.theme.primaryContrastingColor,
                   ),
                 ),
-                Text(
-                  'gennaio - 2023',
-                  style: context.theme.textTheme.titleMedium!.copyWith(
-                    color: context.theme.colorScheme.secondary,
-                  ),
-                ),
+                const Text('gennaio - 2023'),
                 IconButton(
                   onPressed: () {},
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
-                    color: context.theme.colorScheme.secondary,
+                    color: context.theme.primaryContrastingColor,
                   ),
                 ),
               ],
@@ -66,9 +52,6 @@ class Calendar extends StatelessWidget {
                     Text(
                       day,
                       textAlign: TextAlign.end,
-                      style: context.theme.textTheme.titleSmall!.copyWith(
-                        color: context.theme.colorScheme.secondary,
-                      ),
                     ),
                 ],
               ),
@@ -92,9 +75,6 @@ class Calendar extends StatelessWidget {
                             Text(
                               (index * 6).toString(),
                               textAlign: TextAlign.center,
-                              style: context.theme.textTheme.titleSmall!.copyWith(
-                                color: context.theme.colorScheme.secondary,
-                              ),
                             ),
                             const SizedBox(height: 4),
                           ],
@@ -118,7 +98,7 @@ class Calendar extends StatelessWidget {
                         return Container(
                           alignment: Alignment.centerRight,
                           decoration: BoxDecoration(
-                            color: context.theme.colorScheme.secondary,
+                            color: context.theme.primaryContrastingColor,
                             borderRadius: BorderRadius.circular(3),
                           ),
                           child: Text((index + 1).toString()),

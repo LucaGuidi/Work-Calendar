@@ -53,19 +53,18 @@ class CustomTextFormField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 15),
             child: Text(
-              title!,
-              style: context.theme.textTheme.titleSmall,
+              title!
             ),
           ),
         TextFormField(
-          cursorColor: context.theme.colorScheme.secondary,
+          cursorColor: context.theme.primaryContrastingColor,
           obscureText: obscureText,
           inputFormatters: inputFormatters,
           initialValue: initialValue,
           focusNode: focusNode,
           readOnly: !enabled,
           onTap: enabled ? onTap : () {},
-          style: TextStyle(fontSize: 16, color: context.theme.colorScheme.secondary),
+          style: TextStyle(fontSize: 16, color: context.theme.primaryContrastingColor),
           smartQuotesType: SmartQuotesType.disabled,
           textAlignVertical: TextAlignVertical.center,
           controller: controller,
@@ -77,9 +76,9 @@ class CustomTextFormField extends StatelessWidget {
           textInputAction: textInputAction,
           validator: validator,
           decoration: InputDecoration(
-            focusColor: context.theme.colorScheme.secondary,
-            hoverColor: context.theme.colorScheme.secondary,
-            iconColor: context.theme.colorScheme.secondary,
+            focusColor: context.theme.primaryContrastingColor,
+            hoverColor: context.theme.primaryContrastingColor,
+            iconColor: context.theme.primaryContrastingColor,
             isDense: true,
             filled: true,
             fillColor: context.theme.primaryColor,

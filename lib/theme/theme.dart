@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class AppTheme {
   final Color scaffoldBackgroundColor;
@@ -6,87 +6,88 @@ class AppTheme {
   final Color secondaryColor;
   final Color surface;
 
-  AppTheme(
-      {this.scaffoldBackgroundColor = const Color(0xFF1A1A1A),
-      this.primaryColor = const Color(0xFF1E90FF),
-      this.secondaryColor = Colors.white,
-      this.surface = const Color(0xFF333333)});
+  AppTheme({
+    this.scaffoldBackgroundColor = const Color(0xFF000000),
+    this.primaryColor = const Color(0xFF2997FF),
+    this.secondaryColor = const Color(0xFFF5F5F7),
+    this.surface = const Color(0xFF1D1D1F),
+  });
 
-  ThemeData toThemeData() {
-    var colorScheme = ColorScheme.fromSeed(
-      seedColor: primaryColor,
-      primary: primaryColor,
-      secondary: secondaryColor,
-      surface: surface,
-      onSurface: secondaryColor,
+  CupertinoThemeData toThemeData(BuildContext context) {
+    // var colorScheme = ColorScheme.fromSeed(
+    //   seedColor: primaryColor,
+    //   primary: primaryColor,
+    //   secondary: secondaryColor,
+    //   surface: surface,
+    //   onSurface: secondaryColor,
+    // );
+    return CupertinoThemeData(
+      brightness: MediaQuery.of(context).platformBrightness == Brightness.dark ? Brightness.dark : Brightness.light,
     );
-    return ThemeData(
-      scaffoldBackgroundColor: scaffoldBackgroundColor,
-      dialogBackgroundColor: surface,
-      colorScheme: colorScheme,
-      fontFamily: 'Consolas',
-      appBarTheme: AppBarTheme(
-        foregroundColor: Colors.white,
-        backgroundColor: scaffoldBackgroundColor,
-        centerTitle: true,
-        iconTheme: const IconThemeData(size: 20),
-        titleTextStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      textTheme: const TextTheme(
-        headlineLarge: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
-        headlineMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-        headlineSmall: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
-        titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        titleSmall: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-        bodyMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-        bodySmall: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          foregroundColor: MaterialStateColor.resolveWith((states) {
-            var color = secondaryColor;
-            if (states.contains(MaterialState.disabled)) {
-              color = color.withOpacity(0.5);
-            }
-            return color;
-          }),
-          backgroundColor: MaterialStateColor.resolveWith((states) {
-            var color = primaryColor;
-            if (states.contains(MaterialState.disabled)) {
-              color = color.withOpacity(0.5);
-            }
-            return color;
-          }),
-          textStyle: MaterialStateTextStyle.resolveWith((states) {
-            return const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            );
-          }),
-        ),
-      ),
-      iconTheme: IconThemeData(
-        color: secondaryColor,
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        prefixIconColor: secondaryColor,
-        suffixIconColor: secondaryColor,
-        iconColor: secondaryColor,
-        isDense: true,
-        filled: true,
-        border: const UnderlineInputBorder(
-          borderSide: BorderSide(),
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-      ),
-      progressIndicatorTheme: ProgressIndicatorThemeData(color: secondaryColor),
-      datePickerTheme: DatePickerThemeData(
-        backgroundColor: surface,
-        dividerColor: primaryColor,
-        headerForegroundColor: Colors.white,
-      ),
-    );
+    // return ThemeData(
+    //   scaffoldBackgroundColor: scaffoldBackgroundColor,
+    //   dialogBackgroundColor: AppColors.dialogBG,
+    //   colorScheme: colorScheme,
+    //   fontFamily: 'Consolas',
+    //   appBarTheme: AppBarTheme(
+    //     foregroundColor: Colors.white,
+    //     backgroundColor: scaffoldBackgroundColor,
+    //     centerTitle: true,
+    //     iconTheme: const IconThemeData(size: 20),
+    //     titleTextStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+    //   ),
+    //   textTheme: const TextTheme(
+    //     headlineLarge: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+    //     headlineSmall: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+    //     titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+    //     titleMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+    //     bodyLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.normal),
+    //     bodyMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+    //   ),
+    //   elevatedButtonTheme: ElevatedButtonThemeData(
+    //     style: ButtonStyle(
+    //       foregroundColor: MaterialStateColor.resolveWith((states) {
+    //         var color = secondaryColor;
+    //         if (states.contains(MaterialState.disabled)) {
+    //           color = color.withOpacity(0.5);
+    //         }
+    //         return color;
+    //       }),
+    //       backgroundColor: MaterialStateColor.resolveWith((states) {
+    //         var color = primaryColor;
+    //         if (states.contains(MaterialState.disabled)) {
+    //           color = color.withOpacity(0.5);
+    //         }
+    //         return color;
+    //       }),
+    //       textStyle: MaterialStateTextStyle.resolveWith((states) {
+    //         return const TextStyle(
+    //           fontSize: 20,
+    //           fontWeight: FontWeight.w600,
+    //         );
+    //       }),
+    //     ),
+    //   ),
+    //   iconTheme: IconThemeData(
+    //     color: secondaryColor,
+    //   ),
+    //   inputDecorationTheme: InputDecorationTheme(
+    //     prefixIconColor: secondaryColor,
+    //     suffixIconColor: secondaryColor,
+    //     iconColor: secondaryColor,
+    //     isDense: true,
+    //     filled: true,
+    //     border: const UnderlineInputBorder(
+    //       borderSide: BorderSide(),
+    //       borderRadius: BorderRadius.all(Radius.circular(20)),
+    //     ),
+    //   ),
+    //   progressIndicatorTheme: ProgressIndicatorThemeData(color: secondaryColor),
+    //   datePickerTheme: DatePickerThemeData(
+    //     backgroundColor: surface,
+    //     dividerColor: primaryColor,
+    //     headerForegroundColor: Colors.white,
+    //   ),
+    // );
   }
 }

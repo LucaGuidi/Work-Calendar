@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 extension BuildContextExtension on BuildContext {
-  ThemeData get theme => Theme.of(this);
+  CupertinoThemeData get theme => CupertinoTheme.of(this);
 
   double get height => MediaQuery.of(this).size.height;
 
