@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:work_calendar/presentation/home/bloc/home_bloc.dart';
 import 'package:work_calendar/presentation/home/widgets/menu.dart';
@@ -69,16 +68,19 @@ class HomeView extends StatelessWidget {
                         stateDate: state.initialDate,
                       ),
                       const SizedBox(height: 60),
-                      AnimatedOpacity(
-                        opacity: state.showFinalDate ? 1.0 : 0.0,
-                        duration: const Duration(milliseconds: 500),
-                        child: _datePickerCard(
-                          context: context,
-                          onDatePicked: (date) {
-                            context.read<HomeBloc>().add(FinalDatePicked(() => date));
-                          },
-                          title: "FINAL_DATE".tr(),
-                          stateDate: state.finalDate,
+                      Visibility(
+                        visible: state.showFinalDate,
+                        child: AnimatedOpacity(
+                          opacity: state.showFinalDate ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 500),
+                          child: _datePickerCard(
+                            context: context,
+                            onDatePicked: (date) {
+                              context.read<HomeBloc>().add(FinalDatePicked(() => date));
+                            },
+                            title: "FINAL_DATE".tr(),
+                            stateDate: state.finalDate,
+                          ),
                         ),
                       ),
                       AnimatedOpacity(

@@ -39,6 +39,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SettingsPage(),
       );
     },
+    TabBarRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TabBarPage(),
+      );
+    },
   };
 }
 
@@ -94,6 +100,20 @@ class SettingsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TabBarPage]
+class TabBarRoute extends PageRouteInfo<void> {
+  const TabBarRoute({List<PageRouteInfo>? children})
+      : super(
+          TabBarRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TabBarRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
